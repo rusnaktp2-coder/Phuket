@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สัมผัสมนต์เสน่ห์ภูเก็ต - มุกงามแห่งอันดามัน</title>
+    <!-- Google Fonts: Prompt & Sarabun for contemporary Thai typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        pearl: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
+                        content: ['Sarabun', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(224, 242, 254, 0.8);
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(3, 105, 161, 0.3) 0%, rgba(12, 74, 110, 0.85) 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-ocean-500 selection:text-white">
+
+    <!-- Modal for High-Resolution Real Photo Preview -->
+    <div id="imageModal" class="fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all duration-300" onclick="closeImageModal()">
+        <div class="relative max-w-4xl w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10" onclick="event.stopPropagation()">
+            <div class="relative max-h-[75vh] flex items-center justify-center bg-black/40">
+                <img id="modalImg" src="" alt="" class="max-h-[75vh] w-auto max-w-full object-contain">
+                <button onclick="closeImageModal()" aria-label="ปิดรูปภาพ" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-5 bg-slate-900 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-white">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-ocean-400 bg-ocean-950/80 px-2.5 py-1 rounded-full border border-ocean-500/30 mb-1.5">
+                        <i data-lucide="camera" class="w-3.5 h-3.5"></i> ภาพถ่ายสถานที่จริง (Verified Real Photo)
+                    </span>
+                    <h4 id="modalTitle" class="text-lg font-bold text-white">ชื่อสถานที่</h4>
+                    <p id="modalDesc" class="text-xs text-slate-300 font-content mt-0.5">คำอธิบายสถานที่</p>
+                </div>
+                <button onclick="closeImageModal()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-medium self-end sm:self-center transition-colors">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-ocean-100/60 transition-all duration-300" id="mainHeader">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-ocean-600 to-ocean-400 flex items-center justify-center text-white shadow-md shadow-ocean-500/20 group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="palmtree" class="w-6 h-6"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-tight text-slate-800 group-hover:text-ocean-600 transition-colors">
+                        สัมผัสมนต์เสน่ห์<span class="text-ocean-600">ภูเก็ต</span>
+                    </span>
+                    <span class="text-[11px] font-content text-slate-400 tracking-wider">PEARL OF THE ANDAMAN</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-7">
+                <a href="#home" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">หน้าแรก</a>
+                <a href="#attractions" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">สถานที่ท่องเที่ยว</a>
+                <a href="#food" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">อาหารพื้นเมือง</a>
+                <a href="#festivals" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">เทศกาลกินเจ</a>
+                <a href="#travel-info" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">การเดินทาง & ฤดูกาล</a>
+                <a href="#planner" class="text-slate-600 hover:text-ocean-600 text-[15px] font-medium transition-colors">แพลนเที่ยว</a>
+            </div>
+
+            <!-- Action Button -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#planner" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-ocean-500 to-ocean-600 hover:from-ocean-600 hover:to-ocean-700 text-white text-sm font-medium shadow-md shadow-ocean-500/25 transition-all duration-300 hover:shadow-lg hover:shadow-ocean-500/35 flex items-center gap-2">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>จัดทริป & ดูแพลน</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" aria-label="เปิดเมนู" class="md:hidden p-2 rounded-xl text-slate-600 hover:text-ocean-600 hover:bg-ocean-50 transition-colors">
+                <i data-lucide="menu" id="menuOpenIcon" class="w-6 h-6"></i>
+                <i data-lucide="x" id="menuCloseIcon" class="w-6 h-6 hidden"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-ocean-100 px-6 pt-3 pb-6 transition-all duration-300 shadow-xl">
+            <div class="flex flex-col space-y-3 font-medium">
+                <a href="#home" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">หน้าแรก</a>
+                <a href="#attractions" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">สถานที่ท่องเที่ยว</a>
+                <a href="#food" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">อาหารพื้นเมือง</a>
+                <a href="#festivals" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">เทศกาลกินเจภูเก็ต</a>
+                <a href="#travel-info" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">การเดินทาง & ฤดูกาลน่าเที่ยว</a>
+                <a href="#planner" class="mobile-link py-2.5 text-slate-700 hover:text-ocean-600 border-b border-slate-100">แพลนเที่ยว 3-7 วัน</a>
+                <a href="#planner" class="mobile-link mt-3 text-center py-3 bg-ocean-600 text-white rounded-xl shadow-md font-semibold">เลือกแพลนเที่ยวของคุณ</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="home" class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=2000&q=80" 
+                     alt="ภูเก็ต หาดทรายและทะเลอันดามัน" 
+                     class="w-full h-full object-cover object-center transform scale-105 duration-1000 ease-out"
+                     onerror="this.src='https://placehold.co/1920x1080/0284c7/ffffff?text=Phuket+Paradise'">
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-12 pb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-ocean-100 text-xs sm:text-sm font-medium mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                    <span>เมืองสร้างสรรค์ด้านวิทยาการอาหารโดยยูเนสโก (UNESCO)</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight text-white drop-shadow-md">
+                    ค้นพบเสน่ห์แท้จริง<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-ocean-300">
+                        มุกงามแห่งท้องทะเลอันดามัน
+                    </span>
+                </h1>
+                <p class="mt-6 text-base sm:text-xl text-ocean-50 max-w-2xl mx-auto font-content leading-relaxed font-light drop-shadow">
+                    เพลิดเพลินกับหาดทรายขาวละเอียด สถาปัตยกรรมชิโนโปรตุกีสอันวิจิตร และรสชาติอาหารพื้นเมืองระดับตำนานที่ภูเก็ต
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#attractions" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-ocean-700 hover:bg-ocean-50 font-semibold shadow-lg shadow-black/10 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                        <i data-lucide="compass" class="w-5 h-5 text-ocean-600"></i>
+                        <span>เริ่มต้นสำรวจสถานที่</span>
+                    </a>
+                    <a href="#food" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-ocean-600/60 hover:bg-ocean-600/80 text-white font-medium border border-white/30 backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2">
+                        <i data-lucide="utensils" class="w-5 h-5"></i>
+                        <span>ลิ้มลองอาหารมิชลิน</span>
+                    </a>
+                </div>
+
+                <!-- Stats Highlights -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                        <div class="text-2xl sm:text-3xl font-bold text-white">30+</div>
+                        <div class="text-xs sm:text-sm text-ocean-100 font-content mt-1">หาดทรายสวยระดับโลก</div>
+                    </div>
+                    <div class="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                        <div class="text-2xl sm:text-3xl font-bold text-white">100+</div>
+                        <div class="text-xs sm:text-sm text-ocean-100 font-content mt-1">อาคารเก่าชิโนโปรตุกีส</div>
+                    </div>
+                    <div class="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                        <div class="text-2xl sm:text-3xl font-bold text-white">UNESCO</div>
+                        <div class="text-xs sm:text-sm text-ocean-100 font-content mt-1">เมืองแห่งศาสตร์อาหาร</div>
+                    </div>
+                    <div class="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                        <div class="text-2xl sm:text-3xl font-bold text-white">365 วัน</div>
+                        <div class="text-xs sm:text-sm text-ocean-100 font-content mt-1">มนต์เสน่ห์เที่ยวได้ตลอดปี</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attractions Section -->
+        <section id="attractions" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-ocean-600 font-semibold tracking-wider text-sm uppercase bg-ocean-100/70 px-3.5 py-1.5 rounded-full inline-block mb-3">DESTINATIONS</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">แลนด์มาร์กยอดนิยมที่คุณไม่ควรพลาด</h2>
+                <p class="mt-3 text-slate-600 font-content text-base sm:text-lg">ภาพถ่ายสถานที่จริง คัดสรรแลนด์มาร์กไฮไลต์ที่สะท้อนเสน่ห์อันแท้จริงของเกาะภูเก็ต (คลิกที่รูปเพื่อชมภาพขยาย)</p>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
+                    <button onclick="filterAttractions('all')" class="filter-btn active-filter px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300" data-category="all">ทั้งหมด</button>
+                    <button onclick="filterAttractions('beach')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400" data-category="beach">หาดทราย & เกาะ</button>
+                    <button onclick="filterAttractions('culture')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400" data-category="culture">วัฒนธรรม & ประวัติศาสตร์</button>
+                    <button onclick="filterAttractions('viewpoint')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400" data-category="viewpoint">จุดชมวิว & พระอาทิตย์ตก</button>
+                </div>
+            </div>
+
+            <!-- Attractions Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="attractionsGrid">
+                <!-- Card 1: แหลมพรหมเทพ (Promthep Cape - Real Sunset Photo) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="viewpoint">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_at_Promthep_cape%2C_Phuket_island%2C_Thailand_(33471076460).jpg?width=1600', 'แหลมพรหมเทพ (Promthep Cape)', 'จุดชมพระอาทิตย์ตกดินอันเลื่องชื่อ แสงทไวไลท์สีส้มทองทาบขอบฟ้าอันดามันกับแนวต้นตาลคู่สัญลักษณ์', 'https://www.google.com/maps/dir/?api=1&destination=7.7638,98.3053')">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_at_Promthep_cape%2C_Phuket_island%2C_Thailand_(33471076460).jpg?width=800" 
+                             alt="แหลมพรหมเทพ ภูเก็ต ท้องฟ้ายามอาทิตย์ตกดินและต้นตาล" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Laem_Phromthep_in_Phuket_(5733622568).jpg?width=800'">
+                        <span class="absolute top-4 left-4 bg-ocean-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • จุดชมวิว
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9 (15k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ราไวย์ อ.เมืองภูเก็ต
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">แหลมพรหมเทพ (Promthep Cape)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">จุดชมพระอาทิตย์ตกดินที่สวยงามและมีชื่อเสียงที่สุดในประเทศไทย ยามเย็นแสงสีส้มทองทาบขอบฟ้าจรดผืนทะเลอันดามัน พร้อมทิวต้นตาลอันเป็นเอกลักษณ์</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="clock" class="w-3.5 h-3.5 inline mr-1"></i> แนะนำช่วง 17:30 - 18:30 น.</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.7638,98.3053" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: ย่านเมืองเก่าภูเก็ต ซอยรมณีย์ (Phuket Old Town - Real Sino-Portuguese Photo) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="culture">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Soi_Rommanee%2C_Phuket_Town.jpg?width=1600', 'ย่านเมืองเก่าภูเก็ต (Phuket Old Town)', 'อาคารชิโน-โปรตุกีสหลากสีสันสดใสในซอยรมณีย์และถนนถลาง สะท้อนอารยธรรมและประวัติศาสตร์เหมืองแร่ดีบุก', 'https://www.google.com/maps/dir/?api=1&destination=7.8847,98.3891')">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Soi_Rommanee%2C_Phuket_Town.jpg?width=800" 
+                             alt="ย่านเมืองเก่าภูเก็ต ซอยรมณีย์ ตึกชิโนโปรตุกีสสีสดใส" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?auto=format&fit=crop&w=800&q=80'">
+                        <span class="absolute top-4 left-4 bg-amber-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • วัฒนธรรม
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (12k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ถนนถลาง - ซอยรมณีย์
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">ย่านเมืองเก่าภูเก็ต (Phuket Old Town)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">ดื่มด่ำกับสถาปัตยกรรมชิโน-โปรตุกีสสีลูกกวาดในซอยรมณีย์และถนนถลาง เดินชมสตรีตอาร์ต คาเฟ่วินเทจ และถนนคนเดินหลาดใหญ่</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="footprints" class="w-3.5 h-3.5 inline mr-1"></i> เดินถ่ายรูป & คาเฟ่ฮอปปิ้ง</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8847,98.3891" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: หาดป่าตอง (Patong Beach - Real Beach, Parasailing & Umbrellas) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Patong_Beach_on_Phuket.jpg?width=1600', 'หาดป่าตอง (Patong Beach)', 'หาดทรายขาวทอดยาว คลื่นน้ำทะเลสีฟ้าสดใส สีสันของร่มชายหาด และกิจกรรมทางน้ำยอดนิยมอย่างร่มพาราเซลลิ่ง', 'https://www.google.com/maps/dir/?api=1&destination=7.8967,98.2965')">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Patong_Beach_on_Phuket.jpg?width=800" 
+                             alt="หาดป่าตอง ภูเก็ต หาดทราย ร่มสีสันสดใส และกิจกรรมทางน้ำ" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'">
+                        <span class="absolute top-4 left-4 bg-cyan-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • ชายหาดยอดนิยม
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (18k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ป่าตอง อ.กะทู้
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">หาดป่าตอง (Patong Beach)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">ชายหาดรูปพระจันทร์เสี้ยวที่คึกคักที่สุดในภูเก็ต หาดทรายขาวละเอียด น้ำทะเลใส สนุกกับกิจกรรมทางน้ำ พาราเซลลิ่ง เจ็ตสกี และแสงสียามค่ำคืน</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="waves" class="w-3.5 h-3.5 inline mr-1"></i> พาราเซลลิ่ง & เจ็ตสกี</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8967,98.2965" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: วัดไชยธาราราม (วัดฉลอง) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="culture">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Pagoda_-_Wat_Chalong.jpg?width=1600', 'วัดฉลอง (Wat Chalong)', 'พระมหาธาตุเจดีย์พระจอมไทยบารมีประกาศ วัดคู่บ้านคู่เมืองภูเก็ตอันเป็นที่เคารพสักการะของพุทธศาสนิกชน', 'https://www.google.com/maps/dir/?api=1&destination=7.8480,98.3370')">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Pagoda_-_Wat_Chalong.jpg?width=800" 
+                             alt="วัดฉลอง ภูเก็ต พระมหาธาตุเจดีย์พระจอมไทยบารมีประกาศ" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Wat_Chalong_-_Phuket.jpg?width=800'">
+                        <span class="absolute top-4 left-4 bg-amber-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • วัฒนธรรม
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9 (9k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ฉลอง อ.เมืองภูเก็ต
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">วัดฉลอง (Wat Chalong)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">วัดคู่บ้านคู่เมืองภูเก็ต นมัสการองค์หลวงพ่อแช่มอันศักดิ์สิทธิ์ และชมพระมหาธาตุเจดีย์พระจอมไทยบารมีประกาศ ประดิษฐานพระบรมสารีริกธาตุ</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="clock" class="w-3.5 h-3.5 inline mr-1"></i> 08:00 - 17:00 น.</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8480,98.3370" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: พระพุทธมิ่งมงคลเอกนาคคีรี (พระใหญ่) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="viewpoint">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Phuket_Thailand_Big-Buddha-of-Phuket-05.jpg?width=1600', 'พระใหญ่ภูเก็ต (Big Buddha)', 'พระพุทธมิ่งมงคลเอกนาคคีรี พระพุทธรูปปางมารวิชัยหินอ่อนสีขาวสุริยกานต์บนยอดเขานาคเกิด', 'https://www.google.com/maps/dir/?api=1&destination=7.8277,98.3129')">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Phuket_Thailand_Big-Buddha-of-Phuket-05.jpg?width=800" 
+                             alt="พระใหญ่ภูเก็ต พระพุทธมิ่งมงคลเอกนาคคีรี เขานาคเกิด" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/The_Big_Buddha%2C_Phuket.jpg?width=800'">
+                        <span class="absolute top-4 left-4 bg-ocean-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • จุดชมวิว
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (11k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ยอดเขานาคเกิด ต.กะรน
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">พระใหญ่ภูเก็ต (Big Buddha)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">พระพุทธรูปปางมารวิชัยหินอ่อนขาวสง่างามบนยอดเขานาคเกิด รับลมทะเลธรรมชาติและชมวิวพาโนรามาอ่าวฉลองจรดแหลมพรหมเทพ</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="eye" class="w-3.5 h-3.5 inline mr-1"></i> วิวอ่าวฉลองและทะเลอันดามัน</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8277,98.3129" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: เกาะราชา & เกาะเฮ -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1600&q=85', 'เกาะเฮ และ เกาะราชาใหญ่', 'น้ำทะเลสีมรกตใสปิ๊ง ชายหาดขาวเนียนละเอียด และแหล่งดำน้ำตื้นดูปะการังยอดนิยม', 'https://www.google.com/maps/dir/?api=1&destination=7.8214,98.3618')">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80" 
+                             alt="เกาะราชา เกาะเฮ ภูเก็ต น้ำทะเลใส" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/0ea5e9/ffffff?text=Racha+Island'">
+                        <span class="absolute top-4 left-4 bg-cyan-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • ทะเล & เกาะ
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9 (5k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="anchor" class="w-3.5 h-3.5"></i> ท่าเรืออ่าวฉลอง (จุดขึ้นเรือ)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">เกาะเฮ และ เกาะราชาใหญ่</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">เกาะสวรรค์แห่งการดำน้ำตื้นดูปะการัง เพลิดเพลินกับหาดทรายขาวน้ำใสราวกับกระจก และกิจกรรมทางน้ำสุดผ่อนคลาย</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="sun" class="w-3.5 h-3.5 inline mr-1"></i> เหมาะสำหรับ One-Day Trip</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8214,98.3618" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS ท่าเรือ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7: หาดยะนุ้ย (Ya Nui Beach) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXgkGu4IAyn8pgWGeb97z6-J-_ae4EkKMhxecoWKEJ_g&s=10', 'หาดยะนุ้ย (Ya Nui Beach)', 'เวิ้งอ่าวเล็กๆ อันแสนสงบและอบอุ่นระหว่างแหลมพรหมเทพและจุดชมวิวกังหันลม น้ำทะเลใสแจ๋ว โขดหินสวยงาม ยอดนิยมสำหรับการพายเรือคายัค ดำน้ำตื้น และถ่ายรูป', 'https://www.google.com/maps/dir/?api=1&destination=7.7675,98.3064')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXgkGu4IAyn8pgWGeb97z6-J-_ae4EkKMhxecoWKEJ_g&s=10" 
+                             alt="หาดยะนุ้ย ภูเก็ต น้ำทะเลใส โขดหิน และเรือคายัค" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Yanui_Beach%2C_Phuket.jpg?width=800'">
+                        <span class="absolute top-4 left-4 bg-cyan-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • ชายหาด & พายคายัค
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (4.5k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ราไวย์ อ.เมืองภูเก็ต
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">หาดยะนุ้ย (Ya Nui Beach)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">อ่าวเล็กๆ ลับตาแต่น่าหลงใหล ทรายละเอียด น้ำทะเลใส เหมาะแก่การพายเรือคายัคข้ามไปเกาะมัน ดำน้ำตื้นดูปะการัง และชมพระอาทิตย์ตก</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="compass" class="w-3.5 h-3.5 inline mr-1"></i> พายคายัค & สน็อกเกิล</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.7675,98.3064" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8: แหลมกระทิง (Laem Krating) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="viewpoint">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEkL_hiM-rOIob1U15GVl4oM_JHpc8fut0msKXMFHr3A&s=10', 'แหลมกระทิง (Laem Krating)', 'จุดชมวิวสายผจญภัยยอดฮิต ทุ่งหญ้าสีทองพลิ้วไหวริมหน้าผาหิน และหินเรือใบแลนด์มาร์ก ทัศนียภาพกว้างไกลจรดขอบฟ้าอันดามันยามอาทิตย์อัสดง', 'https://www.google.com/maps/dir/?api=1&destination=7.7698,98.2934')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEkL_hiM-rOIob1U15GVl4oM_JHpc8fut0msKXMFHr3A&s=10" 
+                             alt="แหลมกระทิง ภูเก็ต หน้าผาทะเลและทุ่งหญ้าสีทอง" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/0284c7/ffffff?text=Laem+Krating'">
+                        <span class="absolute top-4 left-4 bg-ocean-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> จุดชมวิว Unseen
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9 (3.2k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ใกล้หาดในหาน ต.กะรน
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">แหลมกระทิง (Laem Krating)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">จุดชมวิวธรรมชาติอันซีน เดินเลาะโขดหินและทุ่งหญ้าตามไหล่เขา ชมหินเรือใบและอาทิตย์ตกดินพาโนรามา แนะนำสวมรองเท้าผ้าใบ</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="footprints" class="w-3.5 h-3.5 inline mr-1"></i> เดินเทรลเลียบผา ~30-40 นาที</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.7698,98.2934" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9: จุดชมวิวกังหันลม (Windmill Viewpoint) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="viewpoint">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0yAKDFk_iKU0VsYxGO_n3bX2eDfLB4tozVDNZhffTNw&s=10', 'จุดชมวิวกังหันลม (Windmill Viewpoint)', 'ตั้งอยู่ระหว่างหาดยะนุ้ยและหาดในหาน มองเห็นกังหันลมผลิตไฟฟ้าสีขาวขนาดใหญ่ เวิ้งอ่าวสีคราม เรือยอชต์ทอดสมอ และเป็นจุดปล่อยร่มร่อนพาราไกลดิ้ง', 'https://www.google.com/maps/dir/?api=1&destination=7.7694,98.3056')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0yAKDFk_iKU0VsYxGO_n3bX2eDfLB4tozVDNZhffTNw&s=10" 
+                             alt="จุดชมวิวกังหันลม ภูเก็ต วิวหาดยะนุ้ยและทะเลอันดามัน" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_from_Windmill_Viewpoint.jpg?width=800'">
+                        <span class="absolute top-4 left-4 bg-sky-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • จุดชมวิวมุมสูง
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (6.8k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ราไวย์ อ.เมืองภูเก็ต
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">จุดชมวิวกังหันลม (Windmill Viewpoint)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">จุดชมวิวมุมสูงที่มองเห็นหาดยะนุ้ยและหาดในหานแบบพาโนรามา ลมพัดเย็นสบายตลอดทั้งวัน จุดยอดนิยมสำหรับชมพระอาทิตย์ตกและร่มร่อน</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="wind" class="w-3.5 h-3.5 inline mr-1"></i> จุดปล่อยร่มร่อนพาราไกลดิ้ง</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.7694,98.3056" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 10: หาดกะหลิ่ม (Kalim Beach) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Mu6jm0EHFKFQ8hCnlPvnpju54ZddN_QtfF7YQCu-OQ&s=10', 'หาดกะหลิ่ม (Kalim Beach)', 'หาดหินธรรมชาติที่เชื่อมต่อจากทิศเหนือของหาดป่าตอง แหล่งรวมสตรีตฟู้ดริมทางยามเย็น และจุดเล่นเซิร์ฟโต้คลื่นยอดนิยมในฤดูมรสุม', 'https://www.google.com/maps/dir/?api=1&destination=7.9094,98.2933')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Mu6jm0EHFKFQ8hCnlPvnpju54ZddN_QtfF7YQCu-OQ&s=10" 
+                             alt="หาดกะหลิ่ม ภูเก็ต ชายหาดโขดหินและคลื่นทะเล" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/0ea5e9/ffffff?text=Kalim+Beach'">
+                        <span class="absolute top-4 left-4 bg-teal-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • สตรีตฟู้ด & เซิร์ฟ
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.6 (3.8k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ตอนเหนือของหาดป่าตอง อ.กะทู้
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">หาดกะหลิ่ม (Kalim Beach)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">ชายหาดโขดหินบรรยากาศสงบติดกับหาดป่าตอง ช่วงเย็นมีร้านอาหารสตรีตฟู้ดท้องถิ่นเรียงรายริมทาง และเป็นจุดเล่นเซิร์ฟยอดนิยมของชาวภูเก็ต</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="utensils" class="w-3.5 h-3.5 inline mr-1"></i> ตลาดของกินริมทางยามเย็น</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.9094,98.2933" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 11: หาดกะรน (Karon Beach) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDpyzUvPDHMzmSEnK9n36ZoQYPX2McVftH02Njk0Jnaw&s=10', 'หาดกะรน (Karon Beach)', 'ชายหาดทรายขาวเนียนสะอาดยาวกว่า 3 กิโลเมตร ทรายมีเสียงเมื่อเหยียบ (Squeaky sand) น้ำทะเลสีฟ้าใส เหมาะสำหรับการพักผ่อน ว่ายน้ำ และเล่นกีฬาชายหาด', 'https://www.google.com/maps/dir/?api=1&destination=7.8361,98.2952')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDpyzUvPDHMzmSEnK9n36ZoQYPX2McVftH02Njk0Jnaw&s=10" 
+                             alt="หาดกะรน ภูเก็ต ทรายขาวทอดยาวและน้ำทะเลสีฟ้าใส" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'">
+                        <span class="absolute top-4 left-4 bg-cyan-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="camera" class="w-3 h-3"></i> ภาพจริง • ทะเลกว้างใหญ่
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.8 (14k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.กะรน อ.เมืองภูเก็ต
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">หาดกะรน (Karon Beach)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">ชายหาดที่ยาวเป็นอันดับสองของภูเก็ต ทรายขาวสะอาดเม็ดละเอียด บรรยากาศโปร่งสบาย ไม่แออัด เหมาะสำหรับการเดินเล่นรับลมและอาบแดด</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="waves" class="w-3.5 h-3.5 inline mr-1"></i> หาดทรายยาวกว่า 3 กิโลเมตร</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=7.8361,98.2952" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 12: หาดไม้ขาว (Mai Khao Beach) -->
+                <div class="attraction-card group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300" data-category="beach">
+                    <div class="relative h-64 overflow-hidden cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VpfK5GQ6U6vccoUtwSSypkWJyud9nUX0yHC_TQeGHg&s=10', 'หาดไม้ขาว (Mai Khao Beach)', 'หาดทรายยาวที่สุดในภูเก็ต ไฮไลต์ระดับโลกคือจุดชมเครื่องบินแลนดิ้งร่อนลงสู่รันเวย์สนามบินภูเก็ตในระยะประชิดริมชายหาด', 'https://www.google.com/maps/dir/?api=1&destination=8.1189,98.3031')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VpfK5GQ6U6vccoUtwSSypkWJyud9nUX0yHC_TQeGHg&s=10" 
+                             alt="หาดไม้ขาว ภูเก็ต เครื่องบินบินลงรันเวย์ริมทะเล" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/800x600/0284c7/ffffff?text=Mai+Khao+Plane+Spotting'">
+                        <span class="absolute top-4 left-4 bg-blue-600/90 text-white backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <i data-lucide="plane" class="w-3 h-3"></i> จุดถ่ายรูปเครื่องบินแลนดิ้ง
+                        </span>
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9 (16k+)
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                            <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกเพื่อดูภาพขยาย
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ocean-600 font-medium mb-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> ต.ไม้ขาว อ.ถลาง (ติดสนามบินภูเก็ต)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-ocean-600 transition-colors">หาดไม้ขาว (Mai Khao Beach)</h3>
+                        <p class="mt-2 text-sm text-slate-500 font-content line-clamp-2">ชายหาดที่ยาวที่สุดในภูเก็ต มีจุดเช็กอินยอดฮิตคือการถ่ายรูปคู่กับเครื่องบินที่กำลังร่อนลงจอดอย่างใกล้ชิดและตื่นตาตื่นใจ</p>
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i data-lucide="camera" class="w-3.5 h-3.5 inline mr-1"></i> Plane Spotting ถ่ายรูปกับเครื่องบิน</span>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=8.1189,98.3031" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-ocean-50 text-ocean-700 hover:bg-ocean-600 hover:text-white transition-all font-semibold flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS นำทาง
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Food Section (Local Gastronomy) -->
+        <section id="food" class="py-24 bg-gradient-to-b from-ocean-50/50 via-white to-ocean-50/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold mb-3">
+                            <i data-lucide="award" class="w-4 h-4 text-amber-600"></i> UNESCO CITY OF GASTRONOMY
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">รสชาติอาหารภูเก็ตระดับตำนาน</h2>
+                        <p class="mt-3 text-slate-600 font-content max-w-2xl">วัฒนธรรมอาหารแบบ "เปอรานากัน" ผสมผสานเอกลักษณ์จีนฮกเกี้ยนและไทยปักษ์ใต้ รสชาติเข้มข้นจัดจ้านตราตรึงใจ (คลิกที่รูปเพื่อชมภาพถ่ายอาหารจริง)</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 text-sm font-medium text-ocean-600 flex items-center gap-1">
+                        <span>แนะนำโดยมิชลินไกด์ & เจ้าถิ่น</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <!-- Food Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Food 1: หมูฮ้อง (Phuket Hokkien Braised Pork Belly - Real Photo) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Red_braised_pork_belly.jpg?width=1600', 'หมูฮ้องภูเก็ต (Phuket Moo Hong)', 'หมูสามชั้นเคี่ยวซีอิ๊วดำและน้ำตาลมะพร้าวสูตรจีนฮกเกี้ยน หอมกรุ่นพริกไทยดำ รากผักชี และกระเทียมไทย เนื้อนุ่มชุ่มฉ่ำละลายในปาก')">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Red_braised_pork_belly.jpg?width=800" 
+                                 alt="หมูฮ้องภูเก็ต หมูสามชั้นเคี่ยวซีอิ๊วสูตรฮกเกี้ยน" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/%E7%B4%85%E7%87%92%E8%82%89_Braised_pork_in_brown_sauce.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-amber-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-amber-600"></i> ภาพจริง • หมูฮ้อง
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">หมูฮ้อง (Moo Hong)</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">หมูสามชั้นเคี่ยวซีอิ๊วดำสูตรฮกเกี้ยน หอมรากผักชีกระเทียมพริกไทย เนื้อนุ่มละลายในปาก ไม่เลี่ยน</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> ร้านระย้า / ตู้กับข้าว</span>
+                            <span class="font-bold text-amber-600">สูตรต้นตำรับ</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 2: ขนมจีนน้ำยาปู (Rice Noodles with Spicy Crab Curry - Real Photo) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Khanom_Jeen_Nam_Yaa.jpg?width=1600', 'ขนมจีนน้ำยาปูภูเก็ต (Kanom Jeen Nam Ya Poo)', 'เส้นขนมจีนสดหมักนุ่ม ราดน้ำยากะทิรสจัดจ้านใส่เนื้อปูเน้นๆ เคียงด้วยผักเหนาะสดนานาชนิดและไข่ต้มยางมะตูม')">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Khanom_Jeen_Nam_Yaa.jpg?width=800" 
+                                 alt="ขนมจีนน้ำยาปูภูเก็ต เส้นขนมจีนราดน้ำยากะทิเข้มข้น" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Kanom_Chin_vegetables.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-rose-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-rose-600"></i> ภาพจริง • น้ำยาปู
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">ขนมจีนน้ำยาปู</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">น้ำแกงกะทิเข้มข้นเนื้อปูม้าก้อนโต ทานคู่กับผักเหนาะสดนานาชนิดและไข่ต้มยางมะตูม</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> ขนมจีนแม่ติ่ง / สะพานหิน</span>
+                            <span class="font-bold text-ocean-600">มิชลิน บิบ กูร์มองด์</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 3: ติ่มซำ & บะกุ๊ดเต๋ (Phuket Morning Dim Sum & Bak Kut Teh - Real Table Photo) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Dim_Sum_Trang.jpg?width=1600', 'ติ่มซำภูเก็ต & บะกุ๊ดเต๋ (Phuket Dim Sum & Bak Kut Teh)', 'วัฒนธรรมอาหารเช้าสไตล์ปักษ์ใต้ ขนมจีบ ฮะเก๋า นึ่งร้อนๆ ในเข่งไม้ไผ่ ทานคู่กับน้ำจิ้มส้มเจื้องสีแดงส้มรสเปรี้ยวหวาน และบะกุ๊ดเต๋ยาจีนร้อนๆ')">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dim_Sum_Trang.jpg?width=800" 
+                                 alt="ติ่มซำภูเก็ตในเข่งไม้ไผ่ ขนมจีบ ฮะเก๋า และชาร้อน" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Bakutteh.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-emerald-600"></i> ภาพจริง • ติ่มซำเข่ง
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">ติ่มซำ & บะกุ๊ดเต๋</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">วิถีอาหารเช้าชาวเกาะ เสิร์ฟในเข่งไม้ไผ่ร้อนๆ ทานคู่กับน้ำจิ้มส้มเจื้องและน้ำซุปกระดูกหมูยาจีน</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> บุญรัตน์ / โชคชัยติ่มซำ</span>
+                            <span class="font-bold text-amber-600">เปิด 06:00 - 10:30 น.</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 4: โอ้เอ๋ว (Phuket Authentic O-Aew Dessert - Real Photo) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/O-aew_(comparison).jpg?width=1600', 'โอ้เอ๋วภูเก็ต (Phuket O-Aew Dessert)', 'ของหวานเอกลักษณ์เฉพาะภูเก็ต ทำจากเมือกเมล็ดโอ้เอ๋วผสมน้ำกล้วยน้ำว้าจนจับตัวเป็นวุ้นใส ทานกับน้ำแข็งไส ถั่วแดงเม็ดใหญ่ เฉาก๊วย และน้ำเชื่อมกลิ่นหอม')">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/O-aew_(comparison).jpg?width=800" 
+                                 alt="โอ้เอ๋วภูเก็ต วุ้นใสโอ้เอ๋ว ถั่วแดง น้ำแข็งไส น้ำหวาน" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/800x600/0ea5e9/ffffff?text=O-Aew+Phuket'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-cyan-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-cyan-600"></i> ภาพจริง • โอ้เอ๋วภูเก็ต
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">โอ้เอ๋ว (O-Aew)</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">วุ้นใสสกัดจากเมล็ดโอ้เอ๋วผสมกล้วยน้ำว้า โรยถั่วแดงเม็ดโต เฉาก๊วย น้ำแข็งไส หวานเย็นสดชื่น</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> ตรอกสุ่นอุทิศ / เมืองเก่า</span>
+                            <span class="font-bold text-ocean-600">เอกลักษณ์ภูเก็ต</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 5: ขนมอาโป๊ง (Phuket Authentic A-Pong Rolled Crepes) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://commons.wikimedia.org/wiki/Special:FilePath/Kue_semprong.jpg?width=1600', 'ขนมอาโป๊งภูเก็ต (Phuket A-Pong)', 'ขนมอาโป๊งแท้สไตล์ภูเก็ต แป้งข้าวเจ้าผสมกะทิและน้ำตาล กลิ้งบนกระทะหลุมเตาถ่านจนได้แผ่นแป้งม้วนสีเหลืองทอง ขอบบางกรอบ ตรงกลางนุ่ม หอมละมุนกะทิสด')">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kue_semprong.jpg?width=800" 
+                                 alt="ขนมอาโป๊งภูเก็ต ม้วนสีเหลืองทองกรอบนอกนุ่มในวางบนใบตอง" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Proses_pembuatan_serabi_kuno.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-amber-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-amber-600"></i> ภาพจริง • อาโป๊ง
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">ขนมอาโป๊ง (A-Pong)</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">แป้งม้วนเตาถ่านขอบสีทองกรอบ ตรงกลางนุ่มหอมกะทิ ของว่างโบราณยอดฮิตทานคู่ชา-กาแฟ</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> อาโป๊งแม่สุณี ซอยสุ่นอุทิศ</span>
+                            <span class="font-bold text-amber-600">มิชลิน บิบ กูร์มองด์</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 6: ข้าวต้มแห้งโกเบนซ์ (Phuket Go Benz Dry Boiled Rice) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM3F2Mp2ICRgO7le6zv-nscChM9mMxLK32gJC4fyL2tA&s=10', 'ข้าวต้มแห้งโกเบนซ์ภูเก็ต (Go Benz Phuket)', 'ข้าวต้มแห้งชามกระเบื้องขาวอันเป็นตำนาน ข้าวสวยร่วนคลุกน้ำมันกระเทียมเจียว โปะด้วยหมูกรอบ หมูสับก้อน ตับและเครื่องในชิ้นโต โรยกระเทียมเจียวกากหมูกรอบสีทองและต้นหอมซอย เสิร์ฟคู่กับน้ำซุปพริกไทยดำรสเผ็ดร้อนกลมกล่อม')">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM3F2Mp2ICRgO7le6zv-nscChM9mMxLK32gJC4fyL2tA&s=10" 
+                                 alt="ข้าวต้มแห้งโกเบนซ์ภูเก็ต ชามขาว หมูกรอบ หมูสับ เครื่องใน กระเทียมเจียว" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Thai_style_pork_rice.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-sky-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-sky-600"></i> ภาพจริง • ข้าวต้มแห้ง
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">ข้าวต้มแห้งโกเบนซ์</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">ข้าวสวยนุ่มคลุกน้ำซุปเข้มข้น โปะหมูกรอบ หมูสับ เครื่องใน และกระเทียมเจียว พร้อมซุปพริกไทยร้อนๆ</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> สี่แยกวิชิตสงคราม ถ.กระบี่</span>
+                            <span class="font-bold text-ocean-600">มิชลิน บิบ กูร์มองด์ 7 ปีซ้อน</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 7: หมี่ฮกเกี้ยน (Phuket Hokkien Fried Noodles with Egg) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JZaFUfSYRHfXezszJeymtpPS-cW0M4kEswMxRKN9cA&s=10', 'หมี่ฮกเกี้ยนผัดใส่ไข่ (Phuket Hokkien Mee)', 'บะหมี่ฮกเกี้ยนเส้นกลมเหนียวนุ่ม ผัดซอสเตาถ่านขลุกขลิกรสเข้มข้น กุ้งทะเลสด ปลาหมึก ผักกวางตุ้ง และโปะด้วยไข่ลวกยางมะตูมเยิ้มๆ คลุกเคล้าเพิ่มความมันนัว')">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JZaFUfSYRHfXezszJeymtpPS-cW0M4kEswMxRKN9cA&s=10" 
+                                 alt="หมี่ฮกเกี้ยนภูเก็ต บะหมี่เส้นใหญ่ผัดซีฟู้ดตอกไข่ยางมะตูม" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://commons.wikimedia.org/wiki/Special:FilePath/KL_hokkien_mee.jpg?width=800'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-amber-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-amber-600"></i> ภาพจริง • หมี่ฮกเกี้ยน
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">หมี่ฮกเกี้ยน (Hokkien Mee)</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">บะหมี่เส้นใหญ่กลมผัดเตาถ่านกับกุ้งสดและซอสเข้มข้น โปะไข่ลวกยางมะตูมเยิ้มตรงกลางชาม</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> หมี่ต้นโพธิ์ วงเวียนหอนาฬิกา</span>
+                            <span class="font-bold text-amber-600">เปิดมานานกว่า 70 ปี</span>
+                        </div>
+                    </div>
+
+                    <!-- Food 8: โอวต้าว (Phuket Authentic O-Tao) -->
+                    <div class="glass-card rounded-3xl p-5 hover:translate-y-[-4px] transition-all duration-300 shadow-sm hover:shadow-xl">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 cursor-pointer group" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqkT2A1GplrIMFitb7WBBQV15hVVKJifE2BGs6c4uxLg&s=10', 'โอวต้าวภูเก็ต (Phuket O-Tao)', 'อาหารพื้นเมืองซิกเนเจอร์สไตล์ฮกเกี้ยน แป้งมันผัดบนกระทะแบนใส่หอยติบตัวเล็ก เผือกนึ่งหั่นเต๋า ไข่ไก่ พริกตำ และโรยหน้าด้วยกากหมูทอดกรอบเจียวไม่อั้น เสิร์ฟคู่กับถั่วงอกสดตัดเลี่ยน', 'https://www.google.com/maps/dir/?api=1&destination=7.8763,98.3962')">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqkT2A1GplrIMFitb7WBBQV15hVVKJifE2BGs6c4uxLg&s=10" 
+                                 alt="โอวต้าวภูเก็ต แป้งผัดเผือกหอยติบโรยกากหมูกรอบเคียงถั่วงอกสดบนใบตอง" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/800x600/10b981/ffffff?text=O-Tao+Phuket'">
+                            <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-emerald-700 px-2.5 py-0.5 rounded-full text-xs font-bold shadow flex items-center gap-1">
+                                <i data-lucide="camera" class="w-3 h-3 text-emerald-600"></i> ภาพจริง • โอวต้าว
+                            </span>
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
+                                <i data-lucide="maximize-2" class="w-4 h-4"></i> คลิกดูภาพขยาย
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">โอวต้าว (O-Tao)</h3>
+                        <p class="text-xs text-slate-500 font-content mt-1.5">แป้งหนุบผัดเผือกและหอยติบ รสเผ็ดเค็มหวานลงตัว โรยกากหมูกรอบล้นๆ เคียงถั่วงอกสดบนใบตอง</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <span class="text-slate-500"><i data-lucide="map-pin" class="w-3.5 h-3.5 inline text-ocean-500"></i> โอวต้าวบางเหนียว / จี้เปี่ยน</span>
+                            <span class="font-bold text-emerald-600">ซิกเนเจอร์ภูเก็ต</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vegetarian Festival Section (ประเพณีถือศีลกินผัก ภูเก็ต) -->
+        <section id="festivals" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-amber-900 via-rose-950 to-slate-900 text-white p-8 sm:p-14 shadow-2xl border border-amber-500/20">
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="px-3.5 py-1 rounded-full bg-amber-400 text-slate-900 text-xs font-bold tracking-wider uppercase">
+                            มรดกภูมิปัญญาทางวัฒนธรรม
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-amber-200 text-xs font-medium border border-white/15">
+                            ขึ้น 1 ค่ำ ถึง 9 ค่ำ เดือน 9 (ตามปฏิทินจีน) ของทุกปี
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-8">
+                        <div class="lg:col-span-7">
+                            <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+                                ประเพณีถือศีลกินผักภูเก็ต <span class="text-amber-400">(เจี๊ยะฉ่าย)</span>
+                            </h2>
+                            <p class="text-slate-300 font-content text-sm sm:text-base leading-relaxed">
+                                มรดกทางวัฒนธรรมอันยิ่งใหญ่กว่า 190 ปีของชาวภูเก็ตเชื้อสายจีน เพื่อชำระล้างจิตใจ ละเว้นการเบียดเบียนสิ่งมีชีวิต บูชาองค์กิ้วอ๋องต่ายเต่และเทพเจ้า 9 พระองค์ สัมผัสความศรัทธา เสียงประทัดกึกก้อง และขบวนแห่พระรอบเมืองอันน่าเกรงขาม
+                            </p>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-amber-400/30 group cursor-pointer" onclick="openImageModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvN0voNWOBISXPpB5WrKUR3mOB3dxOEMtGOMuK1tFMtA&s=10', 'ประเพณีถือศีลกินผักภูเก็ต (เจี๊ยะฉ่าย)', 'บรรยากาศความศรัทธาอันยิ่งใหญ่ในงานประเพณีถือศีลกินผักภูเก็ต มรดกวัฒนธรรมอันศักดิ์สิทธิ์และมีชื่อเสียงระดับโลก', 'https://www.google.com/maps/dir/?api=1&destination=7.8833,98.3848')">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvN0voNWOBISXPpB5WrKUR3mOB3dxOEMtGOMuK1tFMtA&s=10" 
+                                     alt="ประเพณีถือศีลกินผักภูเก็ต เจี๊ยะฉ่าย" 
+                                     class="w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                <span class="absolute top-3 left-3 bg-amber-500 text-slate-900 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
+                                    <i data-lucide="camera" class="w-3.5 h-3.5"></i> ภาพจริง • ประเพณีกินเจ
+                                </span>
+                                <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-amber-200">
+                                    <span class="font-medium">คลิกเพื่อชมภาพขยาย</span>
+                                    <span class="flex items-center gap-1"><i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Fullscreen</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Festival Highlights Cards -->
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-amber-400/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center mb-4">
+                                <i data-lucide="sparkles" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-amber-200 mb-2">ข้อควรปฏิบัติ 10 ประการ</h3>
+                            <p class="text-xs text-slate-300 font-content leading-relaxed">
+                                สวมชุดสีขาวบริสุทธิ์, งดเว้นเนื้อสัตว์และของมีกลิ่นฉุน, รักษาศีล 5 และวาจาบริสุทธิ์, ผู้ไว้ทุกข์และสตรีมีครรภ์งดร่วมขบวนพิธีเพื่อความสงบเรียบร้อย
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Shrines -->
+                    <div class="mt-10 p-6 rounded-2xl bg-black/40 border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+                                <i data-lucide="landmark" class="w-5 h-5 text-amber-400"></i>
+                                ศาลเจ้า (อ๊าม) เก่าแก่ที่ควรไปสักการะในภูเก็ต
+                            </h4>
+                            <p class="text-xs text-slate-300 font-content">
+                                ศาลเจ้าจุ้ยตุ่ยเต้าโบ้เก้ง (อ๊ามจุ้ยตุ่ย), ศาลเจ้ากะทู้ (ต้นกำเนิดประเพณีกินผัก), ศาลเจ้าบางเหนียว และศาลเจ้าจุ้ยตุ่ย
+                            </p>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=7.8833,98.3848" target="_blank" rel="noopener noreferrer" class="shrink-0 px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs flex items-center gap-2 transition-all shadow-lg shadow-amber-400/20">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            <span>GPS นำทางไปศาลเจ้าจุ้ยตุ่ย (อ๊ามหลัก)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Guide & Seasonal Insights Section (การเดินทาง & ฤดูกาลน่าเที่ยว) -->
+        <section id="travel-info" class="py-24 bg-gradient-to-b from-white via-ocean-50/40 to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-ocean-600 font-semibold tracking-wider text-sm uppercase bg-ocean-100/70 px-3.5 py-1.5 rounded-full inline-block mb-3">TRAVEL GUIDE & CLIMATE</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">คู่มือการเดินทาง & ฤดูกาลน่าเที่ยวภูเก็ต</h2>
+                    <p class="mt-3 text-slate-600 font-content text-base sm:text-lg">ข้อมูลการเดินทางครอบคลุมทุกช่องทาง พร้อมช่วงเวลาที่เหมาะสมในการเที่ยวภูเก็ตเพื่อให้คุณวางแผนได้อย่างสมบูรณ์แบบ</p>
+                </div>
+
+                <!-- Seasons Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- Season 1: High Season -->
+                    <div class="glass-card rounded-3xl p-7 border-t-4 border-t-amber-400 shadow-sm hover:shadow-xl transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">แนะนำมากที่สุด</span>
+                            <span class="text-2xl">☀️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">High Season (พ.ย. - เม.ย.)</h3>
+                        <p class="text-xs text-amber-600 font-semibold mt-1">ฟ้าเปิด น้ำทะเลใส นิ่งดั่งกระจก</p>
+                        <ul class="mt-4 space-y-2.5 text-xs text-slate-600 font-content">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>เหมาะสำหรับการล่องเรือ One Day Trip สิมิลัน, เกาะพีพี, เกาะราชา</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>คลื่นนิ่ง ปลอดภัย ดำน้ำตื้นและลึกมองเห็นปะการังชัดเจน</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>ชมพระอาทิตย์ตกดินแหลมพรหมเทพได้งดงามไร้ฝนบดบัง</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Season 2: Green Season -->
+                    <div class="glass-card rounded-3xl p-7 border-t-4 border-t-emerald-500 shadow-sm hover:shadow-xl transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">คุ้มค่า & ธรรมชาติชอุ่ม</span>
+                            <span class="text-2xl">🌿</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Green Season (พ.ค. - ต.ค.)</h3>
+                        <p class="text-xs text-emerald-600 font-semibold mt-1">โรงแรมลดราคา สายเซิร์ฟโต้คลื่นชื่นชอบ</p>
+                        <ul class="mt-4 space-y-2.5 text-xs text-slate-600 font-content">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>ราคาที่พัก 5 ดาวและตั๋วเครื่องบินมีโปรโมชันคุ้มค่าที่สุดในรอบปี</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>ฤดูกาลเล่นเซิร์ฟบอร์ด (Surfing) หาดกะตะ, ป่าตอง, และกะหลิ่ม</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>คาเฟ่ฮอปปิ้งในเมืองเก่าและลิ้มลองอาหารมิชลินสบายๆ คนไม่พลุกพล่าน</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Season 3: Vegetarian Season -->
+                    <div class="glass-card rounded-3xl p-7 border-t-4 border-t-rose-500 shadow-sm hover:shadow-xl transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold">เทศกาลประจำปี</span>
+                            <span class="text-2xl">🏮</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">ช่วงเทศกาลกินเจ (ต.ค.)</h3>
+                        <p class="text-xs text-rose-600 font-semibold mt-1">มนต์เสน่ห์แห่งวัฒนธรรมและอาหารเจ</p>
+                        <ul class="mt-4 space-y-2.5 text-xs text-slate-600 font-content">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>ระยะเวลา 9 วัน 9 คืน เมืองภูเก็ตจะประดับธงสีเหลืองอร่ามทั้งเกาะ</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>อาหารเจสไตล์พื้นเมืองรสเลิศนับร้อยเมนูวางขายริมทางตลอดคืน</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>พิธีกรรมศักดิ์สิทธิ์และขบวนแห่พระรอบเมืองที่หาชมไม่ได้ที่ไหนในโลก</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Transportation Options -->
+                <div class="glass-card rounded-3xl p-8 border border-ocean-100">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i data-lucide="bus" class="w-6 h-6 text-ocean-600"></i>
+                        <span>วิธีการเดินทางภายในเกาะภูเก็ต</span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-ocean-50 text-ocean-600 flex items-center justify-center font-bold mb-3">
+                                <i data-lucide="bus-front" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm">Phuket Smart Bus</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">วิ่งเชื่อมตรงจากสนามบินภูเก็ต - เชิงทะเล - ป่าตอง - กะรน - กะตะ - ราไวย์ ค่าโดยสารประมาณ 100 บาทตลอดสาย</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold mb-3">
+                                <i data-lucide="truck" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm">สองแถวไม้โพถ้อง</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">รถสองแถวไม้เอกลักษณ์ภูเก็ต วิ่งในเขตตัวเมืองและเส้นทางหาดต่างๆ ค่าบริการเริ่มต้นเพียง 15-40 บาท ได้ฟีลท้องถิ่นแท้ๆ</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold mb-3">
+                                <i data-lucide="car" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm">รถเช่าขับเอง (Car Rental)</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">แนะนำมากที่สุดสำหรับเที่ยวครอบครัวหรือกลุ่มเพื่อน สามารถรับรถได้ทันทีที่สนามบิน คล่องตัวและสะดวกสบายในการขึ้นเขา</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold mb-3">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm">แอปเรียกรถ (Grab / Bolt)</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">มีให้บริการครอบคลุมทั่วเกาะ สะดวกสำหรับเดินทางระยะสั้นหรือเดินทางกลับที่พักตอนกลางคืนโดยไม่ต้องต่อรองราคา</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Multi-Day Itineraries (3วัน / 4วัน / 5วัน / 1สัปดาห์) -->
+        <section id="planner" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-ocean-600 font-semibold tracking-wider text-sm uppercase bg-ocean-100/70 px-3.5 py-1.5 rounded-full inline-block mb-3">CURATED ITINERARIES</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">แนะนำแพลนท่องเที่ยวภูเก็ต</h2>
+                <p class="mt-3 text-slate-600 font-content text-base sm:text-lg">เลือกแพลนตามจำนวนวันที่คุณมี ออกแบบเส้นทางอย่างคุ้มค่า ไม่ย้อนไปมา พร้อมปุ่มเชื่อมต่อ GPS นำทางจริง</p>
+
+                <!-- Itinerary Duration Switcher -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
+                    <button onclick="switchPlanDuration('3days')" id="planBtn3" class="plan-duration-btn active-plan px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-ocean-600 text-white shadow-md shadow-ocean-500/25">
+                        <i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> แพลน 3 วัน 2 คืน
+                    </button>
+                    <button onclick="switchPlanDuration('4days')" id="planBtn4" class="plan-duration-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400">
+                        <i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> แพลน 4 วัน 3 คืน
+                    </button>
+                    <button onclick="switchPlanDuration('5days')" id="planBtn5" class="plan-duration-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400">
+                        <i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i> แพลน 5 วัน 4 คืน
+                    </button>
+                    <button onclick="switchPlanDuration('7days')" id="planBtn7" class="plan-duration-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400">
+                        <i data-lucide="sparkles" class="w-4 h-4 inline mr-1"></i> แพลน 1 สัปดาห์ (7 วัน)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plan Content Container -->
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-ocean-100 shadow-xl">
+                <!-- 3 Days Plan -->
+                <div id="planContent3days" class="plan-box space-y-6">
+                    <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">แพลน 3 วัน 2 คืน: "ไฮไลต์ยอดนิยม เมืองเก่า & ทะเลใต้"</h3>
+                            <p class="text-xs sm:text-sm text-slate-500 font-content mt-1">เหมาะสำหรับทริปวันหยุดสุดสัปดาห์ เก็บครบทั้งวัฒนธรรม คาเฟ่ ชายหาด และจุดชมวิวระดับตำนาน</p>
+                        </div>
+                        <span class="px-3.5 py-1.5 rounded-full bg-ocean-50 text-ocean-700 font-semibold text-xs self-start sm:self-auto">ยอดฮิตสำหรับคนเวลาน้อย</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Day 1 -->
+                        <div class="p-5 rounded-2xl bg-ocean-50/50 border border-ocean-100/80">
+                            <span class="px-3 py-1 rounded-full bg-ocean-600 text-white text-xs font-bold inline-block mb-3">วันที่ 1 • วัฒนธรรมเมืองเก่า & คาเฟ่</span>
+                            <ul class="space-y-3 text-xs text-slate-700 font-content">
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">09:00</span>
+                                    <span>ถึงสนามบินภูเก็ต แวะถ่ายรูปเครื่องบินแลนดิ้งที่ <strong>หาดไม้ขาว</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">12:00</span>
+                                    <span>ทานหมี่ฮกเกี้ยน / ขนมจีนน้ำยาปูย่านเมืองเก่า</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">14:00</span>
+                                    <span>เดินเล่นถ่ายรูปตึกชิโนโปรตุกีส ซอยรมณีย์ ชิมโอ้เอ๋ว & อาโป๊ง</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">19:00</span>
+                                    <span>มื้อค่ำสุดฟินกับ <strong>ข้าวต้มแห้งโกเบนซ์</strong> ในตำนาน</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-3 border-t border-ocean-200/60 flex justify-end">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=7.8847,98.3891" target="_blank" rel="noopener noreferrer" class="text-xs text-ocean-700 font-bold hover:text-ocean-800 flex items-center gap-1">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS ย่านเมืองเก่า
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Day 2 -->
+                        <div class="p-5 rounded-2xl bg-ocean-50/50 border border-ocean-100/80">
+                            <span class="px-3 py-1 rounded-full bg-ocean-600 text-white text-xs font-bold inline-block mb-3">วันที่ 2 • ดำน้ำเกาะเฮ & อาทิตย์อัสดง</span>
+                            <ul class="space-y-3 text-xs text-slate-700 font-content">
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">08:30</span>
+                                    <span>เดินทางไปท่าเรืออ่าวฉลอง นั่งสปีดโบ๊ตสู่ <strong>เกาะเฮ & เกาะราชา</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">12:00</span>
+                                    <span>มื้อเที่ยงริมหาด เล่นน้ำ ดำน้ำตื้นชมปะการังน้ำใส</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">16:30</span>
+                                    <span>กลับขึ้นฝั่ง เดินทางสู่ <strong>จุดชมวิวกังหันลม & หาดยะนุ้ย</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">18:00</span>
+                                    <span>ชมพระอาทิตย์ตกดินอันเลื่องชื่อที่ <strong>แหลมพรหมเทพ</strong></span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-3 border-t border-ocean-200/60 flex justify-end">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=7.7638,98.3053" target="_blank" rel="noopener noreferrer" class="text-xs text-ocean-700 font-bold hover:text-ocean-800 flex items-center gap-1">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS แหลมพรหมเทพ
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Day 3 -->
+                        <div class="p-5 rounded-2xl bg-ocean-50/50 border border-ocean-100/80">
+                            <span class="px-3 py-1 rounded-full bg-ocean-600 text-white text-xs font-bold inline-block mb-3">วันที่ 3 • ไหว้พระ & ช้อปปิ้งของฝาก</span>
+                            <ul class="space-y-3 text-xs text-slate-700 font-content">
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">07:30</span>
+                                    <span>อาหารเช้าติ่มซำนึ่งสด & บะกุ๊ดเต๋าร้อนๆ สไตล์คนภูเก็ต</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">09:30</span>
+                                    <span>นมัสการหลวงพ่อแช่ม <strong>วัดฉลอง</strong> เพื่อความเป็นสิริมงคล</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">11:30</span>
+                                    <span>ขึ้นเขานาคเกิด สักการะ <strong>พระใหญ่ภูเก็ต</strong> ชมวิว 360 องศา</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="font-bold text-ocean-600 shrink-0">15:00</span>
+                                    <span>ซื้อของฝาก (เต้าส้อ เม็ดมะม่วงหิมพานต์) ก่อนมุ่งหน้าสู่สนามบิน</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 pt-3 border-t border-ocean-200/60 flex justify-end">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=7.8480,98.3370" target="_blank" rel="noopener noreferrer" class="text-xs text-ocean-700 font-bold hover:text-ocean-800 flex items-center gap-1">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i> GPS วัดฉลอง
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Days Plan -->
+                <div id="planContent4days" class="plan-box hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">แพลน 4 วัน 3 คืน: "ครบรส ทะเล คาเฟ่ และหาดฝั่งตะวันตก"</h3>
+                            <p class="text-xs sm:text-sm text-slate-500 font-content mt-1">เพิ่มเวลาพักผ่อนริมหาดป่าตอง กะรน สตรีตฟู้ดหาดกะหลิ่ม และคาเฟ่ริมหน้าผา</p>
+                        </div>
+                        <span class="px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold text-xs self-start sm:self-auto">สมดุลระหว่างเที่ยวและพักผ่อน</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold inline-block mb-3">วันที่ 1 • เมืองเก่า & หมูฮ้อง</span>
+                            <p class="text-xs text-slate-600 font-content leading-relaxed">
+                                เครื่องลงภูเก็ต เดินเล่นเมืองเก่า ถ่ายภาพตึกโบราณ ชิมขนมอาโป๊งและโอ้เอ๋ว มื้อเย็นจัดเต็มกับหมูฮ้องที่ร้านระย้าหรือตู้กับข้าว
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold inline-block mb-3">วันที่ 2 • ผจญภัยทะเลเกาะราชา</span>
+                            <p class="text-xs text-slate-600 font-content leading-relaxed">
+                                ทริปดำน้ำตื้นเกาะราชา-เกาะเฮ ชมน้ำทะเลใสปิ๊ง ช่วงเย็นกลับมาดูพระอาทิตย์ตกที่ <strong>แหลมพรหมเทพ</strong> ดินเนอร์อาหารทะเลราไวย์
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold inline-block mb-3">วันที่ 3 • หาดกะรน ป่าตอง & กะหลิ่ม</span>
+                            <p class="text-xs text-slate-600 font-content leading-relaxed">
+                                ว่ายน้ำอาบแดดที่ <strong>หาดกะรน</strong> ต่อด้วยกิจกรรมพาราเซลลิ่งที่ <strong>หาดป่าตอง</strong> เย็นนั่งชิลล์กินสตรีตฟู้ดริมโขดหิน <strong>หาดกะหลิ่ม</strong>
+                            </p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold inline-block mb-3">วันที่ 4 • ไหว้พระใหญ่ & เครื่องบิน</span>
+                            <p class="text-xs text-slate-600 font-content leading-relaxed">
+                                ขึ้นเขานาคเกิดกราบไหว้ <strong>พระใหญ่ภูเก็ต</strong> และ <strong>วัดฉลอง</strong> ก่อนกลับแวะถ่ายรูปคู่เครื่องบินแลนดิ้งที่ <strong>หาดไม้ขาว</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Days Plan -->
+                <div id="planContent5days" class="plan-box hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">แพลน 5 วัน 4 คืน: "อันซีนภูเก็ต เทรลผา พายคายัค & จุดชมวิวลับ"</h3>
+                            <p class="text-xs sm:text-sm text-slate-500 font-content mt-1">สัมผัสภูเก็ตในมุมมอง Unseen เดินเทรลแหลมกระทิง พายคายัคหาดยะนุ้ย และชิมอาหารมิชลินครบทุกย่าน</p>
+                        </div>
+                        <span class="px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-700 font-semibold text-xs self-start sm:self-auto">สายแอดเวนเจอร์ & ช่างภาพ</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-ocean-600 text-xs block mb-1">วันที่ 1</span>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">เช็กอิน & ชุมชนเมืองเก่า</h4>
+                            <p class="text-xs text-slate-500 font-content">สัมผัสสตรีตอาร์ตเมืองเก่า ถ่ายภาพซอยรมณีย์ ทานโอวต้าวและข้าวต้มแห้งโกเบนซ์</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-ocean-600 text-xs block mb-1">วันที่ 2</span>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">อัญมณีทะเลอันดามัน</h4>
+                            <p class="text-xs text-slate-500 font-content">ล่องเรือคาตามารันหรือสปีดโบ๊ต ดำน้ำเกาะไม้ท่อนหรือเกาะราชาใหญ่ พักผ่อนบนหาดทรายขาว</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-ocean-600 text-xs block mb-1">วันที่ 3</span>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">คายัคยะนุ้ย & เทรลแหลมกระทิง</h4>
+                            <p class="text-xs text-slate-500 font-content">เช้าพายคายัค <strong>หาดยะนุ้ย</strong> บ่ายลุยเทรลเลียบหน้าผาถ่ายรูปหินเรือใบที่ <strong>แหลมกระทิง</strong></p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-ocean-600 text-xs block mb-1">วันที่ 4</span>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">บีชคลับ & ป่าตองยามค่ำ</h4>
+                            <p class="text-xs text-slate-500 font-content">พักผ่อนริม <strong>หาดกะรน</strong> จิบค็อกเทลริมบีชคลับ สนุกสนานกับแสงสีและความคึกคักของหาดป่าตอง</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-ocean-600 text-xs block mb-1">วันที่ 5</span>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2">ไหว้พระ & ชมวิวสนามบิน</h4>
+                            <p class="text-xs text-slate-500 font-content">สักการะวัดฉลองและพระใหญ่ภูเก็ต ปิดท้ายที่ <strong>หาดไม้ขาว</strong> ถ่ายภาพกับเครื่องบินก่อนบินกลับ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 Days Plan (1 Week) -->
+                <div id="planContent7days" class="plan-box hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">แพลน 1 สัปดาห์ (7 วัน): "Ultimate Phuket เที่ยวลึกซึ้ง ครบทุกซอกมุมเกาะ"</h3>
+                            <p class="text-xs sm:text-sm text-slate-500 font-content mt-1">สัมผัสประสบการณ์เกาะภูเก็ตเต็มรูปแบบ ไม่เร่งรีบ ได้ทั้งพักผ่อน ทะเล กิจกรรมผจญภัย วัฒนธรรม และตะลุยกินระดับโลก</p>
+                        </div>
+                        <span class="px-3.5 py-1.5 rounded-full bg-purple-50 text-purple-700 font-semibold text-xs self-start sm:self-auto">ประสบการณ์ภูเก็ตระดับพรีเมียม</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 1</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">เช็กอิน & บรรยากาศเมืองเก่า</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">เดินเที่ยวถนนถลาง ซอยรมณีย์ ชิมโอ้เอ๋ว อาโป๊ง และมื้อค่ำข้าวต้มแห้งโกเบนซ์</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 2</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">ทะเลอันดามัน เกาะราชา & เกาะเฮ</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">ล่องเรือสปีดโบ๊ต ดำน้ำตื้น ดูปะการัง เย็นกลับมาทานซีฟู้ดสดๆ ตลาดหาดราไวย์</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 3</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">อันซีนแหลมกระทิง & ยะนุ้ย</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">พายคายัคหาดยะนุ้ย เทรลแหลมกระทิง ชมพระอาทิตย์ตกดินที่จุดชมวิวกังหันลม</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 4</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">ป่าตอง กะหลิ่ม & กิจกรรมทางน้ำ</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">เล่นเซิร์ฟและชิมสตรีตฟู้ดหาดกะหลิ่ม เล่นพาราเซลลิ่งหาดป่าตอง และเที่ยวไนท์ไลฟ์</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 5</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">สายศรัทธา วัดฉลอง & พระใหญ่</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">ไหว้หลวงพ่อแช่มวัดฉลอง ขึ้นยอดเขานาคเกิดชมพระใหญ่ภูเก็ต ต่อด้วยสปาผ่อนคลาย</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-purple-600 text-xs">Day 6</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">พักผ่อนหาดกะรน & คาเฟ่ริมผา</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">เดินเล่นทรายแก้วหาดกะรน นั่งจิบกาแฟชมวิวทะเลพาโนรามา ดินเนอร์หรูริมหาด</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 lg:col-span-2">
+                            <span class="font-bold text-purple-600 text-xs">Day 7</span>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">หาดไม้ขาว ช้อปปิ้งของฝาก & เดินทางกลับ</h4>
+                            <p class="text-xs text-slate-500 font-content mt-1">ถ่ายภาพแลนด์มาร์กระดับโลกเครื่องบินแลนดิ้งหาดไม้ขาว ซื้อน้ำพริกกุ้งเสียบและเต้าส้อ เดินทางถึงสนามบินอย่างสบายใจ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Calculator Widget -->
+                <div class="mt-12 pt-10 border-t border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5 text-ocean-600"></i>
+                        <span>เครื่องคำนวณงบประมาณท่องเที่ยวโดยประมาณ</span>
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">จำนวนผู้เดินทาง (คน)</label>
+                            <input type="number" id="travelers" min="1" max="20" value="2" onchange="calculateBudget()" onkeyup="calculateBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-ocean-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">จำนวนวันเดินทาง (วัน)</label>
+                            <input type="number" id="days" min="1" max="30" value="3" onchange="calculateBudget()" onkeyup="calculateBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-ocean-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">ระดับที่พัก</label>
+                            <select id="hotelType" onchange="calculateBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-ocean-500 outline-none">
+                                <option value="1200">โฮสเทล / โรงแรมประหยัด (~1,200 บ./คืน)</option>
+                                <option value="2500" selected>โรงแรมมาตรฐาน 3-4 ดาว (~2,500 บ./คืน)</option>
+                                <option value="5500">รีสอร์ตหรูริมหาด 5 ดาว (~5,500 บ./คืน)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">ยานพาหนะ</label>
+                            <select id="transportType" onchange="calculateBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-ocean-500 outline-none">
+                                <option value="350">เช่ามอเตอร์ไซค์ (~350 บ./วัน)</option>
+                                <option value="1200" selected>เช่ารถยนต์ขับเอง (~1,200 บ./วัน)</option>
+                                <option value="2000">รถตู้พร้อมคนขับ / แท็กซี่ (~2,000 บ./วัน)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Budget Result Display -->
+                    <div class="mt-6 p-5 rounded-2xl bg-gradient-to-r from-ocean-50 to-sky-50 border border-ocean-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-center sm:text-left">
+                            <span class="text-xs text-slate-500 font-content block">ประมาณการค่าใช้จ่ายทั้งหมด (รวมที่พัก ยานพาหนะ อาหาร และกิจกรรม)</span>
+                            <div class="text-3xl font-bold text-ocean-700 mt-0.5">
+                                ฿<span id="totalEstimate">0</span>
+                            </div>
+                        </div>
+                        <div class="text-center sm:text-right">
+                            <span class="text-xs text-slate-500 font-content">เฉลี่ยต่อท่าน</span>
+                            <div id="perPersonEstimate" class="text-lg font-bold text-slate-700">~0 บาท</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Tips & Best Time to Visit -->
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-ocean-600 to-ocean-800 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 max-w-xl">
+                    <span class="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-semibold tracking-wider text-ocean-100">
+                        TRAVEL ADVICE & WEATHER
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-bold leading-tight">
+                        ช่วงเวลาที่ดีที่สุดในการเที่ยวภูเก็ต
+                    </h3>
+                    <p class="text-sm sm:text-base text-ocean-100 font-content leading-relaxed">
+                        • <strong>พฤศจิกายน - เมษายน (High Season):</strong> ทะเลสงบ น้ำใส หาดทรายขาว เป็นช่วงที่เหมาะกับการดำน้ำ เที่ยวเกาะ และทำกิจกรรมกลางแจ้งที่สุด<br>
+                        • <strong>พฤษภาคม - ตุลาคม (Green Season):</strong> ธรรมชาติเขียวชอุ่ม ที่พักราคาคุ้มค่า เหมาะสำหรับสายเซิร์ฟและผู้ที่ชอบบรรยากาศเงียบสงบ
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center w-full md:w-auto min-w-[260px]">
+                    <i data-lucide="sun-medium" class="w-12 h-12 text-amber-300 mx-auto mb-2 animate-pulse"></i>
+                    <div class="text-2xl font-bold">28°C - 33°C</div>
+                    <div class="text-xs text-ocean-200 mt-1 font-content">อุณหภูมิเฉลี่ยตลอดทั้งปี</div>
+                    <div class="mt-4 pt-3 border-t border-white/20 text-xs text-ocean-100 flex items-center justify-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-300"></i>
+                        <span>เที่ยวได้ตลอด 365 วัน</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-ocean-500 flex items-center justify-center text-white">
+                            <i data-lucide="palmtree" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white">สัมผัสมนต์เสน่ห์ภูเก็ต</span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-content leading-relaxed">
+                        คู่มือท่องเที่ยวภูเก็ตออนไลน์อย่างเป็นทางการ รวบรวมข้อมูลสถานที่ท่องเที่ยว อาหารพื้นเมือง วัฒนธรรมประเพณี และการเดินทาง เพื่อประสบการณ์อันแสนประทับใจ
+                    </p>
+                    <div class="flex space-x-3 text-slate-400">
+                        <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-ocean-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-ocean-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" aria-label="Share" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-ocean-600 hover:text-white flex items-center justify-center transition-colors">
+                            <i data-lucide="share-2" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">สำรวจข้อมูล</h4>
+                    <ul class="space-y-2 text-xs font-content">
+                        <li><a href="#attractions" class="hover:text-ocean-400 transition-colors">จุดชมวิวแหลมพรหมเทพ</a></li>
+                        <li><a href="#attractions" class="hover:text-ocean-400 transition-colors">ย่านเมืองเก่าชิโนโปรตุกีส</a></li>
+                        <li><a href="#food" class="hover:text-ocean-400 transition-colors">อาหารมิชลิน & สตรีตฟู้ด</a></li>
+                        <li><a href="#festivals" class="hover:text-ocean-400 transition-colors">เทศกาลกินเจภูเก็ต</a></li>
+                        <li><a href="#planner" class="hover:text-ocean-400 transition-colors">แผนเที่ยว 3 วัน 2 คืน</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Emergency & Travel Contacts -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">เบอร์โทรสำคัญ</h4>
+                    <ul class="space-y-2.5 text-xs font-content text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone-call" class="w-3.5 h-3.5 text-ocean-400"></i>
+                            <span>ตำรวจท่องเที่ยว: <strong>1155</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone-call" class="w-3.5 h-3.5 text-ocean-400"></i>
+                            <span>ททท. สำนักงานภูเก็ต: <strong>076-211-036</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone-call" class="w-3.5 h-3.5 text-ocean-400"></i>
+                            <span>สายด่วนอุบัติเหตุฉุกเฉิน: <strong>1669</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="plane" class="w-3.5 h-3.5 text-ocean-400"></i>
+                            <span>สนามบินนานาชาติภูเก็ต: <strong>076-351-166</strong></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter or Quote -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">บันทึกความทรงจำ</h4>
+                    <p class="text-xs text-slate-400 font-content mb-3 leading-relaxed">
+                        "ภูเก็ตไม่ได้มีเพียงแค่ทะเล แต่คือกลิ่นอายแห่งอารยธรรมและรอยยิ้มของชาวเกาะที่คุณจะหลงรัก"
+                    </p>
+                    <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-[11px] text-ocean-300">
+                        <i data-lucide="heart" class="w-3.5 h-3.5 inline mr-1 text-rose-400"></i> ยินดีต้อนรับสู่ภูเก็ตเสมอ
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-content">
+                <div>
+                    ลิขสิทธิ์ © 2026 สัมผัสมนต์เสน่ห์ภูเก็ต (Discover Phuket). All rights reserved.
+                </div>
+                <div class="mt-4 sm:mt-0 flex gap-4">
+                    <a href="#" class="hover:text-slate-400">ข้อกำหนดการใช้งาน</a>
+                    <a href="#" class="hover:text-slate-400">นโยบายความเป็นส่วนตัว</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            calculateBudget();
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        // Open Real Photo Modal with GPS link support
+        function openImageModal(imgSrc, title, desc, mapUrl) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+
+            modalImg.src = imgSrc;
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            
+            // Handle GPS link button in modal if container exists
+            let gpsBtn = document.getElementById('modalGpsBtn');
+            if (!gpsBtn && mapUrl) {
+                gpsBtn = document.createElement('a');
+                gpsBtn.id = 'modalGpsBtn';
+                gpsBtn.target = '_blank';
+                gpsBtn.rel = 'noopener noreferrer';
+                gpsBtn.className = 'px-4 py-2 rounded-xl bg-ocean-500 hover:bg-ocean-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors';
+                gpsBtn.innerHTML = '<i data-lucide="navigation" class="w-3.5 h-3.5"></i> นำทางด้วย GPS';
+                const footerRight = modal.querySelector('.p-5 > div:last-child');
+                if (footerRight) {
+                    footerRight.prepend(gpsBtn);
+                }
+            }
+            if (gpsBtn) {
+                if (mapUrl) {
+                    gpsBtn.href = mapUrl;
+                    gpsBtn.style.display = 'inline-flex';
+                } else {
+                    gpsBtn.style.display = 'none';
+                }
+            }
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Switch Multi-Day Itinerary Plans (3 Days, 4 Days, 5 Days, 7 Days)
+        function switchPlanDuration(planType) {
+            const plans = ['3days', '4days', '5days', '7days'];
+            plans.forEach(p => {
+                const content = document.getElementById(`planContent${p}`);
+                const btn = document.getElementById(`planBtn${p.replace('days', '')}`);
+                if (p === planType) {
+                    content.classList.remove('hidden');
+                    if (btn) {
+                        btn.className = 'plan-duration-btn active-plan px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-ocean-600 text-white shadow-md shadow-ocean-500/25';
+                    }
+                } else {
+                    content.classList.add('hidden');
+                    if (btn) {
+                        btn.className = 'plan-duration-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 bg-white border border-slate-200 text-slate-600 hover:border-ocean-400';
+                    }
+                }
+            });
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Calculate Budget Estimator
+        function calculateBudget() {
+            const travelers = parseInt(document.getElementById('travelers').value) || 1;
+            const days = parseInt(document.getElementById('days').value) || 1;
+            const hotelCostPerNight = parseInt(document.getElementById('hotelType').value) || 2200;
+            const transportCostPerDay = parseInt(document.getElementById('transportType').value) || 1200;
+
+            const nights = Math.max(1, days - 1);
+            const roomsNeeded = Math.ceil(travelers / 2); // 2 people per room
+            const foodCostPerDayPerPerson = 700; // Estimated food and snack cost
+            const activitiesBudgetPerPerson = 1200; // Entrance & tour estimation
+
+            const totalHotel = nights * hotelCostPerNight * roomsNeeded;
+            const totalTransport = days * transportCostPerDay;
+            const totalFood = days * foodCostPerDayPerPerson * travelers;
+            const totalActivities = activitiesBudgetPerPerson * travelers;
+
+            const total = totalHotel + totalTransport + totalFood + totalActivities;
+            const perPerson = Math.round(total / travelers);
+
+            document.getElementById('totalEstimate').innerText = total.toLocaleString('th-TH');
+            document.getElementById('perPersonEstimate').innerText = `~${perPerson.toLocaleString('th-TH')} บาท`;
+        }
+
+        // Header subtle shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+
+        // Open Real Photo Modal
+        function openImageModal(imgSrc, title, desc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+
+            modalImg.src = imgSrc;
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        // Close Real Photo Modal
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>
